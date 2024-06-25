@@ -41,7 +41,7 @@ public class TinyCompressor implements ICompressor{
 
     }
 
-    def tryCompressSingleFile(CompressInfo info){
+    def tryCompressSingleFile(CompressInfo info) {
 
         println("find target pic >>>>>>>>>>>>> ${info.path}")
         try {

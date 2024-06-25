@@ -30,7 +30,7 @@ class ImgCompressTask extends DefaultTask {
     @TaskAction
     def run() {
         log = Logger.getInstance(project.getProject())
-        log.i("ImgCompressTask run///")
+        log.i("ImgCompressTask run")
 
         if (!project == project.getProject()) {
             throw new IllegalArgumentException("img-compress-plugin must works on project level gradle")

@@ -12,11 +12,6 @@ class WebpCompressor {
         Process process = command.execute()
         process.waitFor()
         println("Converted ${inputImagePath} to ${outputImagePath}")
-
-        //delete original img
-        println(Paths.get(inputImagePath))
-        def deleteOriginImgResult = Files.deleteIfExists(Paths.get(inputImagePath))
-        println("Deleted original PNG image: ${inputImagePath},deleteOriginImgResult:${deleteOriginImgResult}")
     }
 
 }
