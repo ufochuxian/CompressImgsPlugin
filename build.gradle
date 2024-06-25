@@ -5,7 +5,7 @@ buildscript {
     repositories {
         maven{
             //本地调试仓库
-            url '/Users/chenjianxiang/Documents/opensource/CompressImgsPlugin/Repo'
+            url '/Users/chen/Documents/opensource/CompressImgsPlugin/Repo'
         }
         google()
         jcenter()

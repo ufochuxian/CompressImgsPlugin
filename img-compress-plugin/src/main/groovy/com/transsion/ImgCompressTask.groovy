@@ -165,7 +165,7 @@ class ImgCompressTask extends DefaultTask {
                 //过滤白名单文件
                 if (!config.whiteFiles.empty) {
                     for (String s : config.whiteFiles) {
-                        if (fileName.equals(s)) {
+                        if (fileName == s) {
                             log.i("ignore whiteFiles >> " + it.getAbsolutePath())
                             continue fileFlag
                         }
@@ -182,7 +182,7 @@ class ImgCompressTask extends DefaultTask {
                     }
                 }
                 //过滤非jpg或png图片
-                if (fileName.endsWith(".jpg") || fileName.endsWith(".png")) {
+                if (fileName.endsWith(".jpg") || fileName.endsWith(".png") || fileName.endsWith(".webp")) {
                     //.9图剔除
                     if (fileName.contains(".9")) {
                         log.i("ignore 9.png >> " + it.getAbsolutePath())
