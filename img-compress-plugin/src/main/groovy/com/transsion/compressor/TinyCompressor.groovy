@@ -54,10 +54,6 @@ public class TinyCompressor implements ICompressor{
             def tSource = Tinify.fromFile(info.path)
             tSource.toFile(info.outputPath)
 
-            // Convert compressed image to WebP format
-            println("开始准备进入转换webp图片的任务")
-            WebpCompressor.convertToWebP(info.outputPath)
-
             fis = new FileInputStream(new File(info.outputPath))
             //这里没对压缩后如果文件变大做处理
             def afterSize = fis.available()
