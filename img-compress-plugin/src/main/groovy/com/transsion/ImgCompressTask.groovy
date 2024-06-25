@@ -1,4 +1,5 @@
 package com.transsion
+
 import com.android.build.gradle.AppPlugin
 import com.android.build.gradle.LibraryPlugin
 import com.android.build.gradle.api.BaseVariant
@@ -21,6 +22,7 @@ class ImgCompressTask extends DefaultTask {
     Logger log
     List<String> sizeDirList = ["greater500KB", "200~500KB", "100~200KB", "50~100KB", "20~50KB", "less20KB"]
     ResultInfo resultInfo = new ResultInfo()
+
     ImgCompressTask() {
         description = 'ImgCompressTask'
         group = 'imgCompress'
@@ -45,8 +47,12 @@ class ImgCompressTask extends DefaultTask {
         copyToTestPath(unCompressFileList)
         updateCompressInfoList(unCompressFileList, compressedList)
         compressedList.forEach { it ->
-            WebpCompressor.convertImageToWebP(it.outputPath)
-//            WebpCompressor.deleteSourceImg(it.outputPath)
+            def sourceFile = new File(project.rootDir, it.outputPath)
+            if (sourceFile.exists()) {
+                def sourceFileAbsPath = sourceFile.absolutePath
+                WebpCompressor.convertImageToWebP(sourceFileAbsPath)
+                WebpCompressor.deleteSourceImg(sourceFileAbsPath)
+            }
         }
 
         log.i("Task finish, compressed:${resultInfo.compressedSize} files  skip:${resultInfo.skipCount} Files  before total size: ${FileUtils.formetFileSize(resultInfo.beforeSize)}" +
@@ -194,7 +200,7 @@ class ImgCompressTask extends DefaultTask {
                         continue fileFlag
                     }
                     //过滤文件大小
-                    if (!(getPicSize(it) >= config.minSize)){
+                    if (!(getPicSize(it) >= config.minSize)) {
                         log.i("ignore size less than minSize  >> " + it.getAbsolutePath())
                         continue fileFlag
                     }
@@ -234,7 +240,7 @@ class ImgCompressTask extends DefaultTask {
             def beforeSize = originImg == null ? 0 : fis.available()
             def originName = originImg.getName()
             def typeIndex = originName.indexOf(".")
-            def testName = originName.substring(0,typeIndex) +"(test)" + originName.substring(typeIndex,originName.length())
+            def testName = originName.substring(0, typeIndex) + "(test)" + originName.substring(typeIndex, originName.length())
 //            log.i("testName >> " + testName)
             if (beforeSize < 1024 * 20) {
                 outPutPath = "${project.projectDir}/ImageCompressTest/${sizeDirList[5]}/${testName}"
@@ -266,9 +272,9 @@ class ImgCompressTask extends DefaultTask {
     def updateCompressInfoList(List<CompressInfo> newCompressedList, List<CompressInfo> compressedList) {
         //脱敏
         String projectDir = project.projectDir.getAbsolutePath()
-        for (CompressInfo info:newCompressedList){
-            info.path = info.path.substring(projectDir.length(),info.path.length())
-            info.outputPath = info.outputPath.substring(projectDir.length(),info.outputPath.length())
+        for (CompressInfo info : newCompressedList) {
+            info.path = info.path.substring(projectDir.length(), info.path.length())
+            info.outputPath = info.outputPath.substring(projectDir.length(), info.outputPath.length())
 //            println("updateCompressInfoList >> ${info.path}")
 //            println("updateCompressInfoList >> ${info.outputPath}")
         }
@@ -295,19 +301,19 @@ class ImgCompressTask extends DefaultTask {
      * @param newCompressedList
      * @return
      */
-    def copyToTestPath(List<CompressInfo> newCompressedList){
+    def copyToTestPath(List<CompressInfo> newCompressedList) {
         if (!config.test) return
-        newCompressedList.each  { info ->
+        newCompressedList.each { info ->
             File origin = new File(info.path)
-            String testPathName = new File(info.outputPath).parent +"/" + origin.getName()
+            String testPathName = new File(info.outputPath).parent + "/" + origin.getName()
             File copyFile = new File(testPathName)
-            if (copyFile.exists()){
+            if (copyFile.exists()) {
                 copyFile.delete()
             }
             log.i("copyToTestPath >>" + testPathName)
             try {
-                Files.copy(origin.toPath(),copyFile.toPath())
-            } catch (Exception e){
+                Files.copy(origin.toPath(), copyFile.toPath())
+            } catch (Exception e) {
                 log.i("copyToTestPath" + e.printStackTrace())
             }
 
@@ -321,11 +327,11 @@ class ImgCompressTask extends DefaultTask {
      * @param file
      * @return
      */
-    int getPicSize(File file){
+    int getPicSize(File file) {
         def fis = new FileInputStream(file)
         def beforeSize = file == null ? 0 : fis.available()
-        if (fis != null ) fis.close()
-        return beforeSize/1024
+        if (fis != null) fis.close()
+        return beforeSize / 1024
     }
 
 }

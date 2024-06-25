@@ -1,0 +1,26 @@
+[
+    {
+        "preSize": 395858,
+        "outputPath": "/app/src/main/res/drawable/test_pic8.png",
+        "md5": "929063a33beb9d398c71e8092d832983",
+        "ratio": "97%",
+        "compressedSize": 384405,
+        "path": "/app/src/main/res/drawable/test_pic8.png"
+    },
+    {
+        "preSize": 84594,
+        "outputPath": "/app/src/main/res/drawable/test_pic5.png",
+        "md5": "0633b1ac88aca5b83f939a15b5c48840",
+        "ratio": "98%",
+        "compressedSize": 83308,
+        "path": "/app/src/main/res/drawable/test_pic5.png"
+    },
+    {
+        "preSize": 150042,
+        "outputPath": "/app/src/main/res/drawable/test_pic4.png",
+        "md5": "0a0f1353233aaea8523f3fc57f40d68c",
+        "ratio": "94%",
+        "compressedSize": 141931,
+        "path": "/app/src/main/res/drawable/test_pic4.png"
+    }
+]
