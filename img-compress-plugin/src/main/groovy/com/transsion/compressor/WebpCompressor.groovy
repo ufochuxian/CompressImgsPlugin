@@ -16,8 +16,10 @@ class WebpCompressor {
 
     static void deleteSourceImg(String inputImagePath) {
         //delete original img
-        def deleteOriginImgResult = Files.deleteIfExists(Paths.get(inputImagePath))
-        println("Deleted original PNG image: ${inputImagePath},deleteOriginImgResult:${deleteOriginImgResult}")
+        if(inputImagePath.endsWith("png") || inputImagePath.endsWith("jpg")) {
+            def deleteOriginImgResult = Files.deleteIfExists(Paths.get(inputImagePath))
+            println("Deleted original PNG image: ${inputImagePath},deleteOriginImgResult:${deleteOriginImgResult}")
+        }
     }
 
     static def convertImagesToWebP(File dir) {

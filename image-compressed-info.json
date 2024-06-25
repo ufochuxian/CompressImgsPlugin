@@ -1,26 +1,26 @@
 [
     {
-        "preSize": 395858,
-        "outputPath": "/app/src/main/res/drawable/test_pic8.png",
-        "md5": "929063a33beb9d398c71e8092d832983",
-        "ratio": "97%",
-        "compressedSize": 384405,
-        "path": "/app/src/main/res/drawable/test_pic8.png"
+        "preSize": 63374,
+        "outputPath": "/app/src/main/res/drawable/test_pic5.webp",
+        "md5": "33e1020a1f67b6b077dceb205c703865",
+        "ratio": "71%",
+        "compressedSize": 45362,
+        "path": "/app/src/main/res/drawable/test_pic5.webp"
     },
     {
-        "preSize": 84594,
-        "outputPath": "/app/src/main/res/drawable/test_pic5.png",
-        "md5": "0633b1ac88aca5b83f939a15b5c48840",
-        "ratio": "98%",
-        "compressedSize": 83308,
-        "path": "/app/src/main/res/drawable/test_pic5.png"
+        "preSize": 43748,
+        "outputPath": "/app/src/main/res/drawable/test_pic4.webp",
+        "md5": "30d8cd6e07a7b09c50dc2428f849255a",
+        "ratio": "92%",
+        "compressedSize": 40524,
+        "path": "/app/src/main/res/drawable/test_pic4.webp"
     },
     {
-        "preSize": 150042,
-        "outputPath": "/app/src/main/res/drawable/test_pic4.png",
-        "md5": "0a0f1353233aaea8523f3fc57f40d68c",
-        "ratio": "94%",
-        "compressedSize": 141931,
-        "path": "/app/src/main/res/drawable/test_pic4.png"
+        "preSize": 62850,
+        "outputPath": "/app/src/main/res/drawable/test_pic8.webp",
+        "md5": "4c9a1d1c5c2af8be8d6f1750ab5387d1",
+        "ratio": "86%",
+        "compressedSize": 54670,
+        "path": "/app/src/main/res/drawable/test_pic8.webp"
     }
 ]
