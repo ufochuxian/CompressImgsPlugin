@@ -20,12 +20,12 @@ public class ZopflipngCompressor implements ICompressor{
 
     @Override
     void compress(Project rootProject, List<CompressInfo> unCompressFileList, ImgCompressExtension config, ResultInfo resultInfo) {
-        log.i("使用ZopflipngCompressor进行压缩")
         this.project = rootProject
         this.compressInfoList = compressInfoList
         this.config = config
         log = Logger.getInstance(rootProject)
         ZopflipngUtil.copyZopflipng2BuildFolder(project)
+        log.i("使用ZopflipngCompressor进行压缩")
         log.i("type>>ZopflipngCompressor init....")
         PngquantUtil.copyPngquant2BuildFolder(project)
         def zopflipng = ZopflipngUtil.getZopflipngFilePath(project)

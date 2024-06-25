@@ -20,7 +20,7 @@ buildscript {
         //mavenCentral模式
 //        classpath 'io.github.duking666:ImgCompressPlugin:1.2.1'
         //本地调试模式则使用
-        classpath 'com.transsion.plugin:img-compress-plugin:1.2.1'
+        classpath 'com.transsion.plugin:ImgCompressPlugin:1.2.3'
 //        classpath 'io.github.duking666:ImgCompressPlugin:1.2.1'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files

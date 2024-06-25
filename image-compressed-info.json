@@ -1,26 +1,26 @@
 [
     {
-        "preSize": 542307,
+        "preSize": -1,
         "outputPath": "/app/src/main/res/drawable/test_pic8.png",
         "md5": "9e51d6a6fed70ba2d2b5a42c8c2645fa",
-        "ratio": "84%",
-        "compressedSize": 458556,
+        "ratio": "",
+        "compressedSize": -1,
         "path": "/app/src/main/res/drawable/test_pic8.png"
     },
     {
-        "preSize": 94264,
+        "preSize": -1,
         "outputPath": "/app/src/main/res/drawable/test_pic5.png",
         "md5": "873953fe81d8ce09bc4563560d152881",
-        "ratio": "98%",
-        "compressedSize": 92423,
+        "ratio": "",
+        "compressedSize": -1,
         "path": "/app/src/main/res/drawable/test_pic5.png"
     },
     {
-        "preSize": 223421,
+        "preSize": -1,
         "outputPath": "/app/src/main/res/drawable/test_pic4.png",
         "md5": "8b5bdc33a9f5d156d3cad0ffd57ddf9a",
-        "ratio": "80%",
-        "compressedSize": 179858,
+        "ratio": "",
+        "compressedSize": -1,
         "path": "/app/src/main/res/drawable/test_pic4.png"
     }
 ]

@@ -29,7 +29,6 @@ class ImgCompressTask extends DefaultTask {
 
     @TaskAction
     def run() {
-        log.i("start to ImgCompressTask")
         log = Logger.getInstance(project.getProject())
         log.i("ImgCompressTask run///")
 
