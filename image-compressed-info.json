@@ -1,26 +1,26 @@
 [
     {
-        "preSize": 1250425,
+        "preSize": 542307,
         "outputPath": "/app/src/main/res/drawable/test_pic8.png",
-        "md5": "0f6b74994d75d76cc72cad303272766b",
-        "ratio": "43%",
-        "compressedSize": 542307,
+        "md5": "9e51d6a6fed70ba2d2b5a42c8c2645fa",
+        "ratio": "84%",
+        "compressedSize": 458556,
         "path": "/app/src/main/res/drawable/test_pic8.png"
     },
     {
-        "preSize": -1,
+        "preSize": 94264,
         "outputPath": "/app/src/main/res/drawable/test_pic5.png",
-        "md5": "8218fc1d98ec12f921686cc24a592edc",
-        "ratio": "",
-        "compressedSize": -1,
+        "md5": "873953fe81d8ce09bc4563560d152881",
+        "ratio": "98%",
+        "compressedSize": 92423,
         "path": "/app/src/main/res/drawable/test_pic5.png"
     },
     {
-        "preSize": 770688,
+        "preSize": 223421,
         "outputPath": "/app/src/main/res/drawable/test_pic4.png",
-        "md5": "34a9cea8889188d06be8913cbbe63e14",
-        "ratio": "28%",
-        "compressedSize": 223421,
+        "md5": "8b5bdc33a9f5d156d3cad0ffd57ddf9a",
+        "ratio": "80%",
+        "compressedSize": 179858,
         "path": "/app/src/main/res/drawable/test_pic4.png"
     }
 ]

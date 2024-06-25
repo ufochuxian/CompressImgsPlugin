@@ -20,6 +20,7 @@ public class ZopflipngCompressor implements ICompressor{
 
     @Override
     void compress(Project rootProject, List<CompressInfo> unCompressFileList, ImgCompressExtension config, ResultInfo resultInfo) {
+        log.i("使用ZopflipngCompressor进行压缩")
         this.project = rootProject
         this.compressInfoList = compressInfoList
         this.config = config

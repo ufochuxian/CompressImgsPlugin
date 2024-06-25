@@ -21,6 +21,7 @@ class PngquantCompressor implements ICompressor{
 
     @Override
     void compress(Project rootProject, List<CompressInfo> unCompressFileList, ImgCompressExtension config, ResultInfo resultInfo) {
+        log.i("使用PngquantCompressor进行压缩")
         this.project = rootProject
         this.compressInfoList = compressInfoList
         this.config = config

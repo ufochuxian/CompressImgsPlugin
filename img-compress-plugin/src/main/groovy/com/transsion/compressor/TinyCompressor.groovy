@@ -8,6 +8,10 @@ import com.transsion.CompressInfo
 import com.transsion.ImgCompressExtension
 import org.gradle.api.Project
 import com.tinify.*
+
+import java.nio.file.Files
+import java.nio.file.Paths
+
 public class TinyCompressor implements ICompressor{
     int keyIndex = 0
     def rootProject;
@@ -20,6 +24,7 @@ public class TinyCompressor implements ICompressor{
 
     @Override
     void compress(Project rootProject, List<CompressInfo> unCompressFileList, ImgCompressExtension config, ResultInfo resultInfo) {
+        log.i("使用TinyPng进行压缩")
         this.rootProject = rootProject;
         this.compressInfoList = compressInfoList;
         this.config = config
@@ -49,6 +54,9 @@ public class TinyCompressor implements ICompressor{
             def tSource = Tinify.fromFile(info.path)
             tSource.toFile(info.outputPath)
 
+            // Convert compressed image to WebP format
+            println("开始准备进入转换webp图片的任务")
+            convertToWebP(info.outputPath)
 
             fis = new FileInputStream(new File(info.outputPath))
             //这里没对压缩后如果文件变大做处理
@@ -99,8 +107,24 @@ public class TinyCompressor implements ICompressor{
         } catch (AccountException ex) {
             println("TinyCompressor" + ex.printStackTrace())
         }
+    }
 
+    static def convertToWebP(String inputImagePath) {
+        println("进入转换webp图片的任务")
+        def outputImagePath = inputImagePath.replaceAll(/\.png$/, ".webp")
+        def command = "cwebp -q 75 ${inputImagePath} -o ${outputImagePath}"
+        Process process = command.execute()
+        process.waitFor()
+        println("Converted ${inputImagePath} to ${outputImagePath}")
 
+        //delete original img
+        println(Paths.get(inputImagePath))
+        def deleteOriginImgResult = Files.deleteIfExists(Paths.get(inputImagePath))
+        println("Deleted original PNG image: ${inputImagePath},deleteOriginImgResult:${deleteOriginImgResult}")
+    }
+
+    static void main(String[] args) {
+        convertToWebP("/Users/chenjianxiang/Documents/opensource/CompressImgsPlugin/app/src/main/res/drawable/test_pic4.png")
     }
 
 
