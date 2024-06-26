@@ -6,7 +6,6 @@ import com.android.build.gradle.api.BaseVariant
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.transsion.compressor.CompressorFactory
-import com.transsion.compressor.WebpCompressor
 import com.transsion.util.FileUtils
 import com.transsion.util.Logger
 import groovy.json.JsonOutput
@@ -46,14 +45,7 @@ class ImgCompressTask extends DefaultTask {
         CompressorFactory.getCompressor(config.way, project).compress(project, unCompressFileList, config, resultInfo)
         copyToTestPath(unCompressFileList)
         updateCompressInfoList(unCompressFileList, compressedList)
-        compressedList.forEach { it ->
-            def sourceFile = new File(project.rootDir, it.outputPath)
-            if (sourceFile.exists()) {
-                def sourceFileAbsPath = sourceFile.absolutePath
-                WebpCompressor.convertImageToWebP(sourceFileAbsPath)
-                WebpCompressor.deleteSourceImg(sourceFileAbsPath)
-            }
-        }
+
 
         log.i("Task finish, compressed:${resultInfo.compressedSize} files  skip:${resultInfo.skipCount} Files  before total size: ${FileUtils.formetFileSize(resultInfo.beforeSize)}" +
                 " after total size: ${FileUtils.formetFileSize(resultInfo.afterSize)} save size: ${FileUtils.formetFileSize(resultInfo.beforeSize - resultInfo.afterSize)}  ")

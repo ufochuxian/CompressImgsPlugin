@@ -10,7 +10,7 @@ import org.gradle.api.Project
 
 import java.nio.file.Files
 
-class PngquantCompressor implements ICompressor{
+class PngquantCompressor extends BaseCompressor {
     def project;
     def compressInfoList = new ArrayList<CompressInfo>()
     ImgCompressExtension config
@@ -68,6 +68,8 @@ class PngquantCompressor implements ICompressor{
                 log.i("Succeed! ${FileUtils.formetFileSize(originalSize)}-->${FileUtils.formetFileSize(optimizedSize)}, ${rate}% saved! ${info.outputPath}")
                 beforeTotalSize += originalSize
                 afterTotalSize += optimizedSize
+
+                super.onCompressed(info)
             } else if (exitCode == 98) {
                 log.w("Skipped! ${info.path}")
                 skipCount++

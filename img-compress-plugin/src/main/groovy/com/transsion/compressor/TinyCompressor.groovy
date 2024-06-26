@@ -9,12 +9,8 @@ import com.transsion.ImgCompressExtension
 import org.gradle.api.Project
 import com.tinify.*
 
-import java.nio.file.Files
-import java.nio.file.Paths
-
-public class TinyCompressor implements ICompressor{
+class TinyCompressor extends BaseCompressor {
     int keyIndex = 0
-    def rootProject;
     def compressInfoList = new ArrayList<CompressInfo>()
     boolean accountError = false
     ImgCompressExtension config;
@@ -61,6 +57,11 @@ public class TinyCompressor implements ICompressor{
 
             beforeTotalSize += beforeSize
             afterTotalSize += afterSize
+
+            //处理转换webp的信息&删除源文件
+            super.onCompressed(info)
+
+            //记录md5的信息，必须在转换完webP之后，如果更新完信息之后，再生成md5，那么就会发生，再次执行“压缩任务之后”，同名文件的md5信息不一致的问题啦
             info.update(beforeSize,afterSize,FileUtils.generateMD5(new File(info.outputPath)))
             log.i("beforeSize: $beforeSizeStr -> afterSize: ${afterSizeStr} radio:${info.ratio}")
         } catch (AccountException e) {

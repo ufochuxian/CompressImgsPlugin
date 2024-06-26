@@ -9,7 +9,7 @@ import com.transsion.util.PngquantUtil
 import com.transsion.util.ZopflipngUtil
 import org.gradle.api.Project
 
-public class ZopflipngCompressor implements ICompressor{
+class ZopflipngCompressor extends BaseCompressor {
     def project;
     def compressInfoList = new ArrayList<CompressInfo>()
     ImgCompressExtension config
@@ -50,6 +50,7 @@ public class ZopflipngCompressor implements ICompressor{
                 log.i("Succeed! ${FileUtils.formetFileSize(originalSize)}-->${FileUtils.formetFileSize(optimizedSize)}, ${rate}% saved! ${info.outputPath}")
                 beforeTotalSize += originalSize
                 afterTotalSize += optimizedSize
+                super.onCompressed(info)
             } else if (exitCode == 98) {
                 log.w("Skipped! ${info.outputPath}")
                 skipCount++
