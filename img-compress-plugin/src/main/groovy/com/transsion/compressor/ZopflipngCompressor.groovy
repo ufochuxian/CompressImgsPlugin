@@ -44,13 +44,13 @@ class ZopflipngCompressor extends BaseCompressor {
             int exitCode = process.waitFor()
 
             if (exitCode == 0) {
+                super.onCompressed(info)
                 long optimizedSize = new File(info.outputPath).length()
                 float rate = 1.0f * (originalSize - optimizedSize) / originalSize * 100
                 info.update(originalSize,optimizedSize,FileUtils.generateMD5(new File(info.outputPath)))
                 log.i("Succeed! ${FileUtils.formetFileSize(originalSize)}-->${FileUtils.formetFileSize(optimizedSize)}, ${rate}% saved! ${info.outputPath}")
                 beforeTotalSize += originalSize
                 afterTotalSize += optimizedSize
-                super.onCompressed(info)
             } else if (exitCode == 98) {
                 log.w("Skipped! ${info.outputPath}")
                 skipCount++
