@@ -45,6 +45,6 @@ imgCompressOpt{
     way="tinypng"//tinypng,pngquant,zopflip
     tinyKeys=["z862z2062RNqg9Tlx7x2S5DVmQZytvxp"]
     test = false
-    whiteFiles=["test_pic2.png"]
+//    whiteFiles=["test_pic2.png"]
     minSize=20
 }
