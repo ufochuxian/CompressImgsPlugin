@@ -4,10 +4,6 @@ import org.gradle.api.Project
 
 import java.text.SimpleDateFormat
 
-/**
- * @Author: chenenyu
- * @Created: 16/6/30 15:21.
- */
 class Logger {
 
     private static final String LOG_FILE_NAME = "img_compress.log";

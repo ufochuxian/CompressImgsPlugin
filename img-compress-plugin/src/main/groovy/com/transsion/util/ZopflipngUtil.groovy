@@ -3,10 +3,6 @@ package com.transsion.util
 import org.apache.tools.ant.taskdefs.condition.Os
 import org.gradle.api.Project;
 
-/**
- * @Author: chenenyu
- * @Created: 16/6/27 17:44.
- */
 class ZopflipngUtil {
 
     private static final def name = "zopflipng";

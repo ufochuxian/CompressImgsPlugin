@@ -1,26 +1,34 @@
 [
     {
-        "preSize": 62610,
-        "outputPath": "/app/src/main/res/drawable/test_pic5.webp",
-        "md5": "79b3534582c28ad6ad524165446784e5",
-        "ratio": "72%",
-        "compressedSize": 45110,
-        "path": "/app/src/main/res/drawable/test_pic5.webp"
-    },
-    {
-        "preSize": 38694,
-        "outputPath": "/app/src/main/res/drawable/test_pic4.webp",
-        "md5": "9e010d5d3eeafb5f08732ae839e574c1",
-        "ratio": "98%",
-        "compressedSize": 37992,
-        "path": "/app/src/main/res/drawable/test_pic4.webp"
-    },
-    {
-        "preSize": 49360,
+        "preSize": 1250425,
         "outputPath": "/app/src/main/res/drawable/test_pic8.webp",
-        "md5": "0e34a4d194ce7890edde958f8c1dc142",
-        "ratio": "97%",
-        "compressedSize": 48280,
-        "path": "/app/src/main/res/drawable/test_pic8.webp"
+        "md5": "ffd9fa1ce1248cb295d9f47130b30c84",
+        "ratio": "35%",
+        "compressedSize": 445020,
+        "path": "/app/src/main/res/drawable/test_pic8.png"
+    },
+    {
+        "preSize": 94264,
+        "outputPath": "/app/src/main/res/drawable/test_pic5.webp",
+        "md5": "827fc6b1c17abc310f76bd8dcfbd0e31",
+        "ratio": "98%",
+        "compressedSize": 92423,
+        "path": "/app/src/main/res/drawable/test_pic5.png"
+    },
+    {
+        "preSize": 770688,
+        "outputPath": "/app/src/main/res/drawable/test_pic4.webp",
+        "md5": "decf748e700999ac7143129553095c58",
+        "ratio": "25%",
+        "compressedSize": 195885,
+        "path": "/app/src/main/res/drawable/test_pic4.png"
+    },
+    {
+        "preSize": 64479,
+        "outputPath": "/app/src/main/res/drawable/test_pic2.webp",
+        "md5": "ae49417a63221732b1f3f228f90ed4d8",
+        "ratio": "100%",
+        "compressedSize": 64479,
+        "path": "/app/src/main/res/drawable/test_pic2.png"
     }
 ]

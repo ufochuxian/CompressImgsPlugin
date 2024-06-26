@@ -11,7 +11,7 @@ import org.gradle.api.Project
 import java.nio.file.Files
 
 class PngquantCompressor extends BaseCompressor {
-    def project;
+//    def project;
     def compressInfoList = new ArrayList<CompressInfo>()
     ImgCompressExtension config
     def beforeTotalSize = 0
@@ -21,13 +21,13 @@ class PngquantCompressor extends BaseCompressor {
 
     @Override
     void compress(Project rootProject, List<CompressInfo> unCompressFileList, ImgCompressExtension config, ResultInfo resultInfo) {
-        this.project = rootProject
+        this.rootProject = rootProject
         this.compressInfoList = compressInfoList
         this.config = config
         log = Logger.getInstance(rootProject)
         log.i("使用PngquantCompressor进行压缩")
-        PngquantUtil.copyPngquant2BuildFolder(project)
-        def pngquant = PngquantUtil.getPngquantFilePath(project)
+        PngquantUtil.copyPngquant2BuildFolder(rootProject)
+        def pngquant = PngquantUtil.getPngquantFilePath(rootProject)
         unCompressFileList.each { info ->
             File originFile = new File(info.path)
             String type = originFile.getAbsolutePath().substring(originFile.getAbsolutePath().indexOf("."))

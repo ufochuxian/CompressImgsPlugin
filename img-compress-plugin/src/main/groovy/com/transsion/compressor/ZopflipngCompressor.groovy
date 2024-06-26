@@ -10,7 +10,7 @@ import com.transsion.util.ZopflipngUtil
 import org.gradle.api.Project
 
 class ZopflipngCompressor extends BaseCompressor {
-    def project;
+//    def project;
     def compressInfoList = new ArrayList<CompressInfo>()
     ImgCompressExtension config
     def beforeTotalSize = 0
@@ -20,15 +20,15 @@ class ZopflipngCompressor extends BaseCompressor {
 
     @Override
     void compress(Project rootProject, List<CompressInfo> unCompressFileList, ImgCompressExtension config, ResultInfo resultInfo) {
-        this.project = rootProject
+        this.rootProject = rootProject
         this.compressInfoList = compressInfoList
         this.config = config
         log = Logger.getInstance(rootProject)
-        ZopflipngUtil.copyZopflipng2BuildFolder(project)
+        ZopflipngUtil.copyZopflipng2BuildFolder(rootProject)
         log.i("使用ZopflipngCompressor进行压缩")
         log.i("type>>ZopflipngCompressor init....")
-        PngquantUtil.copyPngquant2BuildFolder(project)
-        def zopflipng = ZopflipngUtil.getZopflipngFilePath(project)
+        PngquantUtil.copyPngquant2BuildFolder(rootProject)
+        def zopflipng = ZopflipngUtil.getZopflipngFilePath(rootProject)
         unCompressFileList.each { info ->
             File originFile = new File(info.path)
             String type = originFile.getAbsolutePath().substring(originFile.getAbsolutePath().indexOf("."))
