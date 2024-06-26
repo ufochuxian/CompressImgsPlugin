@@ -53,7 +53,9 @@ class PngquantUtil {
         } else if (Os.isFamily(Os.FAMILY_MAC)) {
             return "${name}-mac"
         } else {
-            return "$name"
+            //处于生成的产物体积大小的考虑，linux暂时不支持
+            return ""
+//            return "$name"
         }
     }
 

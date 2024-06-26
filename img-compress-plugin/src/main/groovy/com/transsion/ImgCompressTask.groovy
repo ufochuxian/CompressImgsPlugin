@@ -185,7 +185,7 @@ class ImgCompressTask extends DefaultTask {
                     }
                 }
                 //过滤非jpg或png图片
-                if (fileName.endsWith(".jpg") || fileName.endsWith(".png") || fileName.endsWith(".webp")) {
+                if (fileName.endsWith(".jpg") || fileName.endsWith(".jpeg") ||fileName.endsWith(".png") || fileName.endsWith(".webp")) {
                     //.9图剔除
                     if (fileName.contains(".9")) {
                         log.i("ignore 9.png >> " + it.getAbsolutePath())

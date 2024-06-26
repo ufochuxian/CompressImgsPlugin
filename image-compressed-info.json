@@ -1,34 +1,42 @@
 [
     {
-        "preSize": 1250425,
-        "outputPath": "/app/src/main/res/drawable/test_pic8.webp",
-        "md5": "ffd9fa1ce1248cb295d9f47130b30c84",
-        "ratio": "35%",
-        "compressedSize": 445020,
-        "path": "/app/src/main/res/drawable/test_pic8.png"
+        "preSize": 4467899,
+        "outputPath": "/app/src/main/res/drawable/bmw.webp",
+        "md5": "95279e98aafa347e75a8378fb00457b1",
+        "ratio": "53%",
+        "compressedSize": 2374137,
+        "path": "/app/src/main/res/drawable/bmw.jpg"
     },
     {
-        "preSize": 94264,
-        "outputPath": "/app/src/main/res/drawable/test_pic5.webp",
-        "md5": "827fc6b1c17abc310f76bd8dcfbd0e31",
-        "ratio": "98%",
-        "compressedSize": 92423,
-        "path": "/app/src/main/res/drawable/test_pic5.png"
+        "preSize": 688872,
+        "outputPath": "/app/src/main/res/drawable/lake.webp",
+        "md5": "6b570b906a1daeb428ab4ccad06f1be3",
+        "ratio": "37%",
+        "compressedSize": 259329,
+        "path": "/app/src/main/res/drawable/lake.jpg"
     },
     {
-        "preSize": 770688,
-        "outputPath": "/app/src/main/res/drawable/test_pic4.webp",
-        "md5": "decf748e700999ac7143129553095c58",
-        "ratio": "25%",
-        "compressedSize": 195885,
-        "path": "/app/src/main/res/drawable/test_pic4.png"
+        "preSize": 9033989,
+        "outputPath": "/app/src/main/res/drawable/p_1_min.webp",
+        "md5": "8968df868e9342bf7be1961fe5daa845",
+        "ratio": "87%",
+        "compressedSize": 7904634,
+        "path": "/app/src/main/res/drawable/p_1_min.png"
     },
     {
-        "preSize": 101236,
-        "outputPath": "/app/src/main/res/drawable/test_pic2.webp",
-        "md5": "ae49417a63221732b1f3f228f90ed4d8",
-        "ratio": "63%",
-        "compressedSize": 64479,
-        "path": "/app/src/main/res/drawable/test_pic2.png"
+        "preSize": 500834,
+        "outputPath": "/app/src/main/res/drawable/mountain.webp",
+        "md5": "85d4c3c4383a9bbf636e45f1606448e5",
+        "ratio": "49%",
+        "compressedSize": 246210,
+        "path": "/app/src/main/res/drawable/mountain.jpg"
+    },
+    {
+        "preSize": 6525594,
+        "outputPath": "/app/src/main/res/drawable/pub.webp",
+        "md5": "ec031b4ac0e1ea9a60a1300b8aecd76e",
+        "ratio": "29%",
+        "compressedSize": 1924634,
+        "path": "/app/src/main/res/drawable/pub.png"
     }
 ]
