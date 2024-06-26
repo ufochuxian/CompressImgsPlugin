@@ -24,10 +24,10 @@
         "path": "/app/src/main/res/drawable/test_pic4.png"
     },
     {
-        "preSize": 64479,
+        "preSize": 101236,
         "outputPath": "/app/src/main/res/drawable/test_pic2.webp",
         "md5": "ae49417a63221732b1f3f228f90ed4d8",
-        "ratio": "100%",
+        "ratio": "63%",
         "compressedSize": 64479,
         "path": "/app/src/main/res/drawable/test_pic2.png"
     }
