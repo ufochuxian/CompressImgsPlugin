@@ -1,58 +1,26 @@
 [
     {
-        "preSize": 62778,
+        "preSize": 62660,
         "outputPath": "/app/src/main/res/drawable/test_pic5.webp",
-        "md5": "3e0ae2f90a5e6625fa5e0949462cba46",
-        "ratio": "71%",
-        "compressedSize": 45164,
+        "md5": "85d3fd7291630a6fc397fd8e8f95cf11",
+        "ratio": "72%",
+        "compressedSize": 45180,
         "path": "/app/src/main/res/drawable/test_pic5.webp"
     },
     {
-        "preSize": 40442,
+        "preSize": 39138,
         "outputPath": "/app/src/main/res/drawable/test_pic4.webp",
-        "md5": "16470d20643b5f13696e4bbf3d15d5a4",
-        "ratio": "96%",
-        "compressedSize": 39196,
+        "md5": "f72525a5cdd604bdfa8fa939326d39ba",
+        "ratio": "98%",
+        "compressedSize": 38416,
         "path": "/app/src/main/res/drawable/test_pic4.webp"
     },
     {
-        "preSize": 53882,
+        "preSize": 50748,
         "outputPath": "/app/src/main/res/drawable/test_pic8.webp",
-        "md5": "1543ae60257b6466609955535f441edc",
-        "ratio": "95%",
-        "compressedSize": 51472,
-        "path": "/app/src/main/res/drawable/test_pic8.webp"
-    },
-    {
-        "preSize": 101236,
-        "outputPath": "/app/src/main/res/drawable/test_pic2.png",
-        "md5": "a66b83ab8776744b1091abfc47383fd4",
-        "ratio": "63%",
-        "compressedSize": 64479,
-        "path": "/app/src/main/res/drawable/test_pic2.png"
-    },
-    {
-        "preSize": 63374,
-        "outputPath": "/app/src/main/res/drawable/test_pic5.webp",
-        "md5": "33e1020a1f67b6b077dceb205c703865",
-        "ratio": "71%",
-        "compressedSize": 45362,
-        "path": "/app/src/main/res/drawable/test_pic5.webp"
-    },
-    {
-        "preSize": 43748,
-        "outputPath": "/app/src/main/res/drawable/test_pic4.webp",
-        "md5": "30d8cd6e07a7b09c50dc2428f849255a",
-        "ratio": "92%",
-        "compressedSize": 40524,
-        "path": "/app/src/main/res/drawable/test_pic4.webp"
-    },
-    {
-        "preSize": 62850,
-        "outputPath": "/app/src/main/res/drawable/test_pic8.webp",
-        "md5": "4c9a1d1c5c2af8be8d6f1750ab5387d1",
-        "ratio": "86%",
-        "compressedSize": 54670,
+        "md5": "df6b412b05318909f01a8f6ef7d0bb72",
+        "ratio": "97%",
+        "compressedSize": 49302,
         "path": "/app/src/main/res/drawable/test_pic8.webp"
     }
 ]
