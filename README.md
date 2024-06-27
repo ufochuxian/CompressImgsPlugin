@@ -10,6 +10,14 @@
 - 压缩后的图<br>
 ![](.README_images/91de93ee.png)
 
+### 压缩图片对比
+
+| Origin Pic                                | Tinypng                                                             |
+|-------------------------------------------|---------------------------------------------------------------------|
+| Compression Type                          | Lossy                                                               |
+| 500.83KB                                  | 111.01KB                                                            |
+| ![mountain.jpg](imgsource%2Fmountain.jpg) | ![mountain.webp](app%2Fsrc%2Fmain%2Fres%2Fdrawable%2Fmountain.webp) |
+
 ### 压缩效率：
 - 整体图片的压缩比的话，有的高，有的低，和图像的整体元素有关系，整体有个60%-70左右的压缩率是有的，有的可以达到90%左右
 
