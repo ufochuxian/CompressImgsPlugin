@@ -68,36 +68,28 @@ imgCompressOpt{
 ```
 [
     {
+        "preSize": 9033989,
+        "outputPath": "/app/src/main/res/drawable/p_1_min.webp",
+        "md5": "8968df868e9342bf7be1961fe5daa845",
+        "ratio": "26%",
+        "compressedSize": 2398770,
+        "path": "/app/src/main/res/drawable/p_1_min.png"
+    },
+    {
+        "preSize": 500834,
+        "outputPath": "/app/src/main/res/drawable/mountain.webp",
+        "md5": "85d4c3c4383a9bbf636e45f1606448e5",
+        "ratio": "22%",
+        "compressedSize": 111012,
+        "path": "/app/src/main/res/drawable/mountain.jpg"
+    },
+    {
         "preSize": 1250425,
-        "outputPath": "/app/src/main/res/drawable/test_pic8.webp",
+        "outputPath": "/app/src/main/res/drawable/girl.webp",
         "md5": "ffd9fa1ce1248cb295d9f47130b30c84",
-        "ratio": "35%",
-        "compressedSize": 445020,
-        "path": "/app/src/main/res/drawable/test_pic8.png"
-    },
-    {
-        "preSize": 94264,
-        "outputPath": "/app/src/main/res/drawable/test_pic5.webp",
-        "md5": "827fc6b1c17abc310f76bd8dcfbd0e31",
-        "ratio": "98%",
-        "compressedSize": 92423,
-        "path": "/app/src/main/res/drawable/test_pic5.png"
-    },
-    {
-        "preSize": 770688,
-        "outputPath": "/app/src/main/res/drawable/test_pic4.webp",
-        "md5": "decf748e700999ac7143129553095c58",
-        "ratio": "25%",
-        "compressedSize": 195885,
-        "path": "/app/src/main/res/drawable/test_pic4.png"
-    },
-    {
-        "preSize": 101236,
-        "outputPath": "/app/src/main/res/drawable/test_pic2.webp",
-        "md5": "ae49417a63221732b1f3f228f90ed4d8",
-        "ratio": "63%",
-        "compressedSize": 64479,
-        "path": "/app/src/main/res/drawable/test_pic2.png"
+        "ratio": "4%",
+        "compressedSize": 57198,
+        "path": "/app/src/main/res/drawable/girl.png"
     }
 ]
 ```
