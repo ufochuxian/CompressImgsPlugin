@@ -50,16 +50,17 @@ class TinyCompressor extends BaseCompressor {
             def tSource = Tinify.fromFile(info.path)
             tSource.toFile(info.outputPath)
 
+
+            //处理转换webp的信息&删除源文件
+            super.onCompressed(info)
+
             fis = new FileInputStream(new File(info.outputPath))
             //这里没对压缩后如果文件变大做处理
             def afterSize = fis.available()
             def afterSizeStr = FileUtils.formetFileSize(afterSize)
-
             beforeTotalSize += beforeSize
             afterTotalSize += afterSize
 
-            //处理转换webp的信息&删除源文件
-            super.onCompressed(info)
 
             //记录md5的信息，必须在转换完webP之后，如果更新完信息之后，再生成md5，那么就会发生，再次执行“压缩任务之后”，同名文件的md5信息不一致的问题啦
             info.update(beforeSize,afterSize,FileUtils.generateMD5(new File(info.outputPath)))

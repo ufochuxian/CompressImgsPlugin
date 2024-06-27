@@ -15,9 +15,9 @@ class WebpCompressor {
         CwebpUtil.copyCwebp2BuildFolder(project)
 
         def cwebpExecutablePath = CwebpUtil.getCwebpFilePath(project)
-//        def command = "${cwebpExecutablePath} -q 75 ${inputImagePath} -o ${outputImagePath}"
 
-        def command = "cwebp -q 75 ${inputImagePath} -o ${outputImagePath}"
+        def command = "${cwebpExecutablePath} -q 75 ${inputImagePath} -o ${outputImagePath}"
+//        def command = "cwebp -q 75 ${inputImagePath} -o ${outputImagePath}"
         Process process = command.execute()
         process.waitFor()
         if (process.exitValue() == 0) {
