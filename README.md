@@ -1,8 +1,8 @@
 <h3>Android gradle自动化压缩图片的插件</h3>
 
 工作原理：一键扫描项目中的资源目录，包括Drawable和Drawable-xx以及mipmap-xx的目录下的所有的png和jpg的图片<br>
-然后根据配置文件，选用具体对应的压缩器，进行png或者jpg图片的压缩，压缩完成后，会自动使用谷歌提供的[cwebp](https://developers.google.com/speed/webp/docs/cwebp)的工具来进行自动转换成Android客户端最长使用的图片格式webp,从而节约图片资源的占用空间。<br>
-
+然后根据配置文件，选用具体对应的压缩器，进行png或者jpg图片的压缩，压缩完成后，会自动使用谷歌提供的[cwebp](https://developers.google.com/speed/webp/docs/cwebp)的工具来进行自动转换成Android客户端最常使用的图片格式webp,从而节约图片资源的占用空间。<br>
+目前支持TinyPng,Pngquant,zopFlip三种压缩方式。
 ### 压缩效果对比
 
 - 原图<br>
