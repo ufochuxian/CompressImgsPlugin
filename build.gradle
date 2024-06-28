@@ -67,8 +67,8 @@ imgCompressOpt{
 }
 
 sonatypeUploader {
-    def releasesRepoUrl = layout.buildDirectory.dir('repos/releases')
-    def snapshotsRepoUrl = layout.buildDirectory.dir('repos/snapshots')
+    def releasesRepoUrl = project.layout.buildDirectory.dir('repos/releases')
+    def snapshotsRepoUrl = project.layout.buildDirectory.dir('repos/snapshots')
     def uploadDir = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
     dir = uploadDir.get().asFile.path
     tokenName = ossrhUsername
