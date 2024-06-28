@@ -1,7 +1,6 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    
     repositories {
         maven{
             //本地调试仓库
@@ -9,13 +8,20 @@ buildscript {
             url new File(project.rootDir,'Repo').absolutePath
         }
         google()
-        jcenter()
         mavenCentral()
+        jcenter()
+        maven {
+            url = uri("https://plugins.gradle.org/m2/")
+        }
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
 //        maven{
 //            url 'https://s01.oss.sonatype.org/content/repositories/releases/'
 //        }
     }
     dependencies {
+
         //插件本身的gradle.tool版本尽可能低,这样项目使用gradle一般就能向下兼容,不至于下载新的gradle版本
         classpath 'com.android.tools.build:gradle:4.1.3'
         //mavenCentral模式
@@ -29,11 +35,22 @@ buildscript {
     }
 }
 
+plugins {
+    id "io.github.jeadyx.sonatype-uploader" version "1.0"
+}
+
+apply plugin: "io.github.jeadyx.sonatype-uploader"
+
+group = "io.github.ufochuxian"
+version = "1.2.3-SNAPSHOT"
+
+
+
 allprojects {
     repositories {
         google()
-        jcenter()
         mavenCentral()
+        jcenter()
     }
 }
 
@@ -47,4 +64,13 @@ imgCompressOpt{
     test = false
 //    whiteFiles=["test_pic2.png"]
     minSize=20
+}
+
+sonatypeUploader {
+    def releasesRepoUrl = layout.buildDirectory.dir('repos/releases')
+    def snapshotsRepoUrl = layout.buildDirectory.dir('repos/snapshots')
+    def uploadDir = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+    dir = uploadDir.get().asFile.path
+    tokenName = ossrhUsername
+    tokenPasswd = ossrhPassword
 }

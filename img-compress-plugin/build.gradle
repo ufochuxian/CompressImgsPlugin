@@ -1,11 +1,13 @@
 plugins {
     id 'groovy'
-    id 'maven'
+    id 'maven-publish'
+    id 'signing'
 }
 
 repositories {
     mavenLocal()
-    jcenter()
+    mavenCentral()
+    google()
 }
 
 
@@ -26,4 +28,5 @@ ext {
     libraryDescription = 'An Android gradle plugin that scans the resource directory in the project and performs batch image compression.'
     libraryVersion = '1.2.3'
 }
-apply from: '../maven-publish.gradle'
+//apply from: '../maven-publish.gradle'
+apply from: '../publish_maven.gradle'

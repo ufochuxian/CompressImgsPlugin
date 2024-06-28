@@ -7,7 +7,7 @@
   <version>1.2.3</version>
   <name>ImgCompressPlugin For Android</name>
   <description>An Android gradle plugin that scans the resource directory in the project and performs batch image compression.</description>
-  <url>https://github.com/duking666/ImgCompressPlugin</url>
+  <url>https://github.com/ufochuxian/CompressImgsPlugin</url>
   <licenses>
     <license>
       <name>The Apache Software License, Version 2.0</name>
@@ -22,9 +22,9 @@
     </developer>
   </developers>
   <scm>
-    <connection>https://github.com/duking666/ImgCompressPlugin.git</connection>
-    <developerConnection>https://github.com/duking666/ImgCompressPlugin.git</developerConnection>
-    <url>https://github.com/duking666/ImgCompressPlugin</url>
+    <connection>https://github.com/ufochuxian/CompressImgsPlugin.git</connection>
+    <developerConnection>https://github.com/ufochuxian/CompressImgsPlugin.git</developerConnection>
+    <url>https://github.com/ufochuxian/CompressImgsPlugin</url>
   </scm>
   <dependencies>
     <dependency>
