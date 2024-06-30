@@ -1,0 +1,64 @@
+apply plugin: "maven-publish"
+apply plugin: "signing"
+apply plugin: "io.github.jeadyx.sonatype-uploader"
+apply plugin: "org.jetbrains.dokka"
+
+tasks.register('dokkaJavadocJar', Jar) {
+    dependsOn(tasks.named("dokkaJavadoc"))
+    from(tasks.named("dokkaJavadoc"))
+    archiveClassifier.set("javadoc")
+}
+publishing {
+    publications {
+        create("mavenTest", MavenPublication) {
+            artifactId = "test-library"
+            from(components["java"])
+            artifact(tasks.getByName("dokkaJavadocJar"))
+            pom {
+                name = "My Library"
+                description = "A concise description of my library greennbg"
+                url = "http://www.example111.com/library"
+                properties = [
+                    "myProp": "value",
+                    "prop.with.dots": "anotherValue"
+                ]
+                licenses {
+                    license {
+                        name = "The Apache License, Version 2.0"
+                        url = "http://www.apache.org/licenses/LICENSE-2.0.txt"
+                    }
+                }
+                developers {
+                    developer {
+                        id = "uuuid"
+                        name = "John"
+                        email = "john@example.com"
+                    }
+                }
+                scm {
+                    connection = "scm:git:git://example.com/my-library.git"
+                    developerConnection = "scm:git:ssh://example.com/my-library.git"
+                    url = "http://example.com/my-library/"
+                }
+            }
+        }
+    }
+    repositories {
+        maven {
+            name = "project"
+            url = uri("${rootDir.path}/repo")
+        }
+    }
+}
+signing{
+    sign(publishing.publications.mavenTest)
+}
+
+sonatypeUploader {
+    def releasesRepoUrl = project.layout.buildDirectory.dir('repos/releases')
+    def snapshotsRepoUrl = project.layout.buildDirectory.dir('repos/snapshots')
+    def uploadDir = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+    dir = uploadDir.get().asFile.path
+    tokenName = ossrhUsername
+    tokenPasswd = ossrhPassword
+}

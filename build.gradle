@@ -35,17 +35,6 @@ buildscript {
     }
 }
 
-plugins {
-    id "io.github.jeadyx.sonatype-uploader" version "1.0"
-}
-
-apply plugin: "io.github.jeadyx.sonatype-uploader"
-
-group = "io.github.ufochuxian"
-version = "1.2.3-SNAPSHOT"
-
-
-
 allprojects {
     repositories {
         google()
@@ -64,13 +53,4 @@ imgCompressOpt{
     test = false
 //    whiteFiles=["test_pic2.png"]
     minSize=20
-}
-
-sonatypeUploader {
-    def releasesRepoUrl = project.layout.buildDirectory.dir('repos/releases')
-    def snapshotsRepoUrl = project.layout.buildDirectory.dir('repos/snapshots')
-    def uploadDir = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
-    dir = uploadDir.get().asFile.path
-    tokenName = ossrhUsername
-    tokenPasswd = ossrhPassword
 }

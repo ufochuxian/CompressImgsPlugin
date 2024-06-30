@@ -1,7 +1,18 @@
 plugins {
     id 'groovy'
-    id 'maven-publish'
-    id 'signing'
+    id("java-library")
+    id("io.github.jeadyx.sonatype-uploader") version "1.0"
+    id("org.jetbrains.dokka") version "1.9.20"
+}
+
+group = 'io.github.ufochuxian'
+version = "1.0"
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+    withSourcesJar()
+    // withJavadocJar() // 如果需要生成 Javadoc jar 文件，取消注释这一行
 }
 
 repositories {
@@ -29,4 +40,4 @@ ext {
     libraryVersion = '1.2.3-SNAPSHOT'
 }
 //apply from: '../maven-publish.gradle'
-apply from: '../publish_maven.gradle'
+apply from: './publish.gradle'
