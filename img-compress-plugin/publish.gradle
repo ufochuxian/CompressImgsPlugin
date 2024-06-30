@@ -3,6 +3,13 @@ apply plugin: "signing"
 apply plugin: "io.github.jeadyx.sonatype-uploader"
 apply plugin: "org.jetbrains.dokka"
 
+ext {
+    artifact = 'ImgCompressPlugin'
+    libraryName = 'ImgCompressPlugin'
+    libraryDescription = 'An Android gradle plugin that scans the resource directory in the project and performs batch image compression.'
+    libraryVersion = version
+}
+
 tasks.register('dokkaJavadocJar', Jar) {
     dependsOn(tasks.named("dokkaJavadoc"))
     from(tasks.named("dokkaJavadoc"))
@@ -48,7 +55,10 @@ publishing {
     repositories {
         maven {
             name = libraryName
-            url = uri("${rootDir.path}/repo")
+            def releasesRepoUrl = layout.buildDirectory.dir('repos/releases')
+            def snapshotsRepoUrl =layout.buildDirectory.dir('repos/snapshots')
+            def uploadDir = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+            url = uri(uploadDir.get().asFile.path)
         }
     }
 }
@@ -57,8 +67,8 @@ signing{
 }
 
 sonatypeUploader {
-    def releasesRepoUrl = project.layout.buildDirectory.dir('repos/releases')
-    def snapshotsRepoUrl = project.layout.buildDirectory.dir('repos/snapshots')
+    def releasesRepoUrl = layout.buildDirectory.dir('repos/releases')
+    def snapshotsRepoUrl =layout.buildDirectory.dir('repos/snapshots')
     def uploadDir = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
     dir = uploadDir.get().asFile.path
     tokenName = ossrhUsername
