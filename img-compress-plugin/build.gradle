@@ -35,9 +35,9 @@ dependencies {
 }
 ext {
     artifact = 'ImgCompressPlugin'
-    libraryName = 'ImgCompressPlugin For Android'
+    libraryName = 'ImgCompressPlugin'
     libraryDescription = 'An Android gradle plugin that scans the resource directory in the project and performs batch image compression.'
-    libraryVersion = '1.2.3-SNAPSHOT'
+    libraryVersion = version
 }
 //apply from: '../maven-publish.gradle'
 apply from: './publish.gradle'

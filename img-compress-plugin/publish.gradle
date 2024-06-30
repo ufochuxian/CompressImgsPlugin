@@ -11,41 +11,43 @@ tasks.register('dokkaJavadocJar', Jar) {
 publishing {
     publications {
         create("mavenTest", MavenPublication) {
-            artifactId = "test-library"
+            artifactId = artifact
             from(components["java"])
             artifact(tasks.getByName("dokkaJavadocJar"))
             pom {
-                name = "My Library"
-                description = "A concise description of my library greennbg"
-                url = "http://www.example111.com/library"
+                name.set(libraryName)
+                description.set(libraryDescription)
+                url.set(siteUrl)
                 properties = [
                     "myProp": "value",
                     "prop.with.dots": "anotherValue"
                 ]
                 licenses {
                     license {
-                        name = "The Apache License, Version 2.0"
-                        url = "http://www.apache.org/licenses/LICENSE-2.0.txt"
+                        name.set('The Apache License, Version 2.0')
+                        url.set('http://www.apache.org/licenses/LICENSE-2.0.txt')
                     }
                 }
+
                 developers {
                     developer {
-                        id = "uuuid"
-                        name = "John"
-                        email = "john@example.com"
+                        id.set(developerId)
+                        name.set(developerName)
+                        email.set(developerEmail)
                     }
                 }
+
                 scm {
-                    connection = "scm:git:git://example.com/my-library.git"
-                    developerConnection = "scm:git:ssh://example.com/my-library.git"
-                    url = "http://example.com/my-library/"
+                    connection.set(gitUrl)
+                    developerConnection.set(gitUrl)
+                    url.set(siteUrl)
                 }
             }
         }
     }
     repositories {
         maven {
-            name = "project"
+            name = libraryName
             url = uri("${rootDir.path}/repo")
         }
     }

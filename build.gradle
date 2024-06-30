@@ -5,7 +5,7 @@ buildscript {
         maven{
             //本地调试仓库
 //            url '/Users/chen/Documents/opensource/CompressImgsPlugin/Repo'
-            url new File(project.rootDir,'Repo').absolutePath
+            url new File(project.rootDir,'repo').absolutePath
         }
         google()
         mavenCentral()
@@ -27,7 +27,7 @@ buildscript {
         //mavenCentral模式
 //        classpath 'io.github.duking666:ImgCompressPlugin:1.2.1'
         //本地调试模式则使用
-        classpath 'com.transsion.plugin:ImgCompressPlugin:1.2.3'
+//        classpath 'com.transsion.plugin:ImgCompressPlugin:1.2.3'
 //        classpath 'io.github.duking666:ImgCompressPlugin:1.2.1'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -46,11 +46,11 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
-apply plugin: 'img-compressor'
-imgCompressOpt{
-    way="tinypng"//tinypng,pngquant,zopflip
-    tinyKeys=["z862z2062RNqg9Tlx7x2S5DVmQZytvxp"]
-    test = false
-//    whiteFiles=["test_pic2.png"]
-    minSize=20
-}
+//apply plugin: 'img-compressor'
+//imgCompressOpt{
+//    way="tinypng"//tinypng,pngquant,zopflip
+//    tinyKeys=["z862z2062RNqg9Tlx7x2S5DVmQZytvxp"]
+//    test = false
+////    whiteFiles=["test_pic2.png"]
+//    minSize=20
+//}

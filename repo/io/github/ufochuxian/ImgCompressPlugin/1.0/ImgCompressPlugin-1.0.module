@@ -1,0 +1,89 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "io.github.ufochuxian",
+    "module": "ImgCompressPlugin",
+    "version": "1.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.2"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 17,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "files": [
+        {
+          "name": "ImgCompressPlugin-1.0.jar",
+          "url": "ImgCompressPlugin-1.0.jar",
+          "size": 2412529,
+          "sha512": "f6a3afbbf794f24b741ec1a0468daa00530d9274557eafd0971e0b5712347294d3782355899941220d177f79094c4abac2c68eb8a95983a31b7a906a5e886299",
+          "sha256": "690affd32aa19aef5d2cdcae09ccf569631496f626c20dfdb8b0e48aa6b6cf7c",
+          "sha1": "634679efe3d374ac65018411e6face2f600221f8",
+          "md5": "b701dc7660f12d120498d97af9bcea50"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 17,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "com.tinify",
+          "module": "tinify",
+          "version": {
+            "requires": "1.6.4"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "ImgCompressPlugin-1.0.jar",
+          "url": "ImgCompressPlugin-1.0.jar",
+          "size": 2412529,
+          "sha512": "f6a3afbbf794f24b741ec1a0468daa00530d9274557eafd0971e0b5712347294d3782355899941220d177f79094c4abac2c68eb8a95983a31b7a906a5e886299",
+          "sha256": "690affd32aa19aef5d2cdcae09ccf569631496f626c20dfdb8b0e48aa6b6cf7c",
+          "sha1": "634679efe3d374ac65018411e6face2f600221f8",
+          "md5": "b701dc7660f12d120498d97af9bcea50"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "ImgCompressPlugin-1.0-sources.jar",
+          "url": "ImgCompressPlugin-1.0-sources.jar",
+          "size": 2344456,
+          "sha512": "2c804c98b7438806c5ead5e6280171a242b83a374ff04ca12a147bb1eb77c84036ab92b75af358d68483daf1329f12186c6f1dc655c74540fcf6dee9d2bfaa5a",
+          "sha256": "d3f3e1c66982531f6955bf850f8ac3f84e745922fdbabf45ec4b13a27b88e3fb",
+          "sha1": "0d88c53382ab593291101b75ad179ca40bdc6197",
+          "md5": "1adbd94c390a42e343696ca6841e436e"
+        }
+      ]
+    }
+  ]
+}
