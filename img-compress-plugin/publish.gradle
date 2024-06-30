@@ -4,8 +4,9 @@ apply plugin: "io.github.jeadyx.sonatype-uploader"
 apply plugin: "org.jetbrains.dokka"
 
 ext {
-    artifact = 'ImgCompressPlugin'
-    libraryName = 'ImgCompressPlugin'
+    isLocal = true
+    artifact = 'imgcompressplugin'
+    libraryName = 'imgcompressplugin'
     libraryDescription = 'An Android gradle plugin that scans the resource directory in the project and performs batch image compression.'
     libraryVersion = version
 }
@@ -26,8 +27,8 @@ publishing {
                 description.set(libraryDescription)
                 url.set(siteUrl)
                 properties = [
-                    "myProp": "value",
-                    "prop.with.dots": "anotherValue"
+                        "myProp"        : "value",
+                        "prop.with.dots": "anotherValue"
                 ]
                 licenses {
                     license {
@@ -54,23 +55,31 @@ publishing {
     }
     repositories {
         maven {
-            name = libraryName
-            def releasesRepoUrl = layout.buildDirectory.dir('repos/releases')
-            def snapshotsRepoUrl =layout.buildDirectory.dir('repos/snapshots')
-            def uploadDir = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
-            url = uri(uploadDir.get().asFile.path)
+            name = 'Project'
+            if(!isLocal) {
+                def releasesRepoUrl = layout.buildDirectory.dir('repos')
+                def snapshotsRepoUrl = layout.buildDirectory.dir('repos')
+                def uploadDir = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+                url = uri(uploadDir.get().asFile.path)
+            } else {
+                def uploadDir =  project.parent.layout.buildDirectory.dir('repos')
+                url = uri(uploadDir.get().asFile.path)
+            }
         }
     }
 }
-signing{
+signing {
     sign(publishing.publications.mavenTest)
 }
 
-sonatypeUploader {
-    def releasesRepoUrl = layout.buildDirectory.dir('repos/releases')
-    def snapshotsRepoUrl =layout.buildDirectory.dir('repos/snapshots')
-    def uploadDir = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
-    dir = uploadDir.get().asFile.path
-    tokenName = ossrhUsername
-    tokenPasswd = ossrhPassword
+if(!ext.isLocal) {
+    sonatypeUploader {
+        def releasesRepoUrl = layout.buildDirectory.dir('repos')
+        def snapshotsRepoUrl = layout.buildDirectory.dir('repos')
+        def uploadDir = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+//    dir = uploadDir.get().asFile.path
+        dir = "${uploadDir.get().asFile.path}/io"
+        tokenName = ossrhUsername
+        tokenPasswd = ossrhPassword
+    }
 }

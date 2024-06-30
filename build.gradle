@@ -1,11 +1,10 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
-
 buildscript {
     repositories {
         maven{
             //本地调试仓库
 //            url '/Users/chen/Documents/opensource/CompressImgsPlugin/Repo'
-            url new File(project.rootDir,'repo').absolutePath
+            url new File(project.buildDir,'repos').absolutePath
         }
         google()
         mavenCentral()
@@ -26,6 +25,7 @@ buildscript {
         classpath 'com.android.tools.build:gradle:4.1.3'
         //mavenCentral模式
 //        classpath 'io.github.duking666:ImgCompressPlugin:1.2.1'
+        classpath 'io.github.ufochuxian:imgcompressplugin:1.0.1'
         //本地调试模式则使用
 //        classpath 'com.transsion.plugin:ImgCompressPlugin:1.2.3'
 //        classpath 'io.github.duking666:ImgCompressPlugin:1.2.1'
@@ -46,11 +46,11 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
-//apply plugin: 'img-compressor'
-//imgCompressOpt{
-//    way="tinypng"//tinypng,pngquant,zopflip
-//    tinyKeys=["z862z2062RNqg9Tlx7x2S5DVmQZytvxp"]
-//    test = false
-////    whiteFiles=["test_pic2.png"]
-//    minSize=20
-//}
+apply plugin: 'img-compressor'
+imgCompressOpt{
+    way="tinypng"//tinypng,pngquant,zopflip
+    tinyKeys=["z862z2062RNqg9Tlx7x2S5DVmQZytvxp"]
+    test = false
+//    whiteFiles=["test_pic2.png"]
+    minSize=20
+}

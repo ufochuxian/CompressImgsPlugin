@@ -6,11 +6,11 @@ plugins {
 }
 
 group = 'io.github.ufochuxian'
-version = "1.0-SNAPSHOT"
+version = "1.0.1"
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
     withSourcesJar()
     // withJavadocJar() // 如果需要生成 Javadoc jar 文件，取消注释这一行
 }
