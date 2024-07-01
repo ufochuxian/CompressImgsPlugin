@@ -1,11 +1,11 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
     repositories {
-        maven{
-            //本地调试仓库
-//            url '/Users/chen/Documents/opensource/CompressImgsPlugin/Repo'
-            url new File(project.buildDir,'repos').absolutePath
-        }
+//        maven{
+//            //本地调试仓库
+////            url '/Users/chen/Documents/opensource/CompressImgsPlugin/Repo'
+//            url new File(project.buildDir,'repos').absolutePath
+//        }
         google()
         mavenCentral()
         jcenter()
@@ -25,7 +25,7 @@ buildscript {
         classpath 'com.android.tools.build:gradle:7.4.2'
         //mavenCentral模式
 //        classpath 'io.github.duking666:ImgCompressPlugin:1.2.1'
-        classpath 'io.github.ufochuxian:imgcompressplugin:1.0.1'
+        classpath 'io.github.ufochuxian:imgcompressplugin:1.0.2'
         //本地调试模式则使用
 //        classpath 'com.transsion.plugin:ImgCompressPlugin:1.2.3'
 //        classpath 'io.github.duking666:ImgCompressPlugin:1.2.1'

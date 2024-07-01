@@ -32,7 +32,7 @@ buildscript {
     }
     dependencies {
         ...
-        classpath 'com.transsion.plugin:ImgCompressPlugin:1.2.1'
+        classpath 'io.github.ufochuxian:imgcompressplugin:1.0.2'
     }
 }
 ...

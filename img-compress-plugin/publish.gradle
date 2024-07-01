@@ -78,6 +78,8 @@ if(!ext.isLocal) {
         def snapshotsRepoUrl = layout.buildDirectory.dir('repos')
         def uploadDir = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
 //    dir = uploadDir.get().asFile.path
+        //这里的后面的io很重要，因为本地生成的目录结构是repos/io/github/ufochuxian/imgcompressplugin,所以这里一定要指定到io这个，这样才能和上传后的maven文件的pom的坐标对应上
+        //要不然上传之后会报错，这里主要关系到的是sonartype的maven的Namespace的名字:io.github.ufochuxian,这里需要精确对应
         dir = "${uploadDir.get().asFile.path}/io"
         tokenName = ossrhUsername
         tokenPasswd = ossrhPassword
