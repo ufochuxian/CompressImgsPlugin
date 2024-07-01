@@ -7,30 +7,15 @@ buildscript {
         }
         google()
         mavenCentral()
-        jcenter()
         maven {
             url = uri("https://plugins.gradle.org/m2/")
         }
-        maven {
-            url "https://plugins.gradle.org/m2/"
-        }
-//        maven{
-//            url 'https://s01.oss.sonatype.org/content/repositories/releases/'
-//        }
     }
     dependencies {
-
         //插件本身的gradle.tool版本尽可能低,这样项目使用gradle一般就能向下兼容,不至于下载新的gradle版本
         classpath 'com.android.tools.build:gradle:7.4.2'
         //mavenCentral模式
-//        classpath 'io.github.duking666:ImgCompressPlugin:1.2.1'
         classpath 'io.github.ufochuxian:imgcompressplugin:1.0.3'
-        //本地调试模式则使用
-//        classpath 'com.transsion.plugin:ImgCompressPlugin:1.2.3'
-//        classpath 'io.github.duking666:ImgCompressPlugin:1.2.1'
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
-        classpath 'com.novoda:bintray-release:0.9'
     }
 }
 
