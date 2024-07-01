@@ -21,7 +21,7 @@ public class BaseCompressor implements ICompressor {
         println("Deleted original PNG image: ${inputImagePath},deleteOriginImgResult:${deleteOriginImgResult}")
     }
 
-    public onCompressed(CompressInfo compressedInfo) {
+    public onCompressed(CompressInfo compressedInfo,Closure onCompressSucceed) {
         def sourceFile = new File(compressedInfo.outputPath)
         if (sourceFile.exists()) {
             def sourceFileAbsPath = sourceFile.absolutePath
@@ -31,6 +31,7 @@ public class BaseCompressor implements ICompressor {
                     // 在这里可以进行其他处理，如删除源图像
                     compressedInfo.outputPath = outputImagePath
                     WebpCompressor.deleteSourceImg(sourceFileAbsPath)
+                    onCompressSucceed()
                 } else {
                     println("回调: 转换失败")
                 }

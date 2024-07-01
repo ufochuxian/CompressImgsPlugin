@@ -65,16 +65,14 @@ class PngquantCompressor extends BaseCompressor {
                     }
                 }
 
-
-                super.onCompressed(info)
-
-                long optimizedSize = new File(info.outputPath).length()
-                float rate = 1.0f * (originalSize - optimizedSize) / originalSize * 100
-                info.update(originalSize,optimizedSize,FileUtils.generateMD5(new File(info.outputPath)))
-                log.i("Succeed! ${FileUtils.formetFileSize(originalSize)}-->${FileUtils.formetFileSize(optimizedSize)}, ${rate}% saved! ${info.outputPath}")
-                beforeTotalSize += originalSize
-                afterTotalSize += optimizedSize
-
+                super.onCompressed(info, {
+                    long optimizedSize = new File(info.outputPath).length()
+                    float rate = 1.0f * (originalSize - optimizedSize) / originalSize * 100
+                    info.update(originalSize,optimizedSize,FileUtils.generateMD5(new File(info.outputPath)))
+                    log.i("Succeed! ${FileUtils.formetFileSize(originalSize)}-->${FileUtils.formetFileSize(optimizedSize)}, ${rate}% saved! ${info.outputPath}")
+                    beforeTotalSize += originalSize
+                    afterTotalSize += optimizedSize
+                })
             } else if (exitCode == 98) {
                 log.w("Skipped! ${info.path}")
                 skipCount++

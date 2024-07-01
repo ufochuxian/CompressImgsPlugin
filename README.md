@@ -32,7 +32,7 @@ buildscript {
     }
     dependencies {
         ...
-        classpath 'io.github.ufochuxian:imgcompressplugin:1.0.2'
+        classpath 'io.github.ufochuxian:imgcompressplugin:1.0.3'
     }
 }
 ...
