@@ -31,12 +31,10 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        ...
         classpath 'io.github.ufochuxian:imgcompressplugin:1.0.3'
     }
 }
-...
-...
+
 //图片压缩插件配置
 apply plugin: 'img-compressor'
 imgCompressOpt{
