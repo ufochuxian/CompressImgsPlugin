@@ -1,5 +1,13 @@
 [
     {
+        "preSize": 500834,
+        "outputPath": "/app/src/main/res/drawable/mountain.webp",
+        "md5": "85d4c3c4383a9bbf636e45f1606448e5",
+        "ratio": "22%",
+        "compressedSize": 111012,
+        "path": "/app/src/main/res/drawable/mountain.jpg"
+    },
+    {
         "preSize": 43683,
         "outputPath": "/app/src/main/res/drawable/img.webp",
         "md5": "ed288b9cb58aeb6b0ec0dd4d407b0027",
