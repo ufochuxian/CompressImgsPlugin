@@ -44,8 +44,29 @@ imgCompressOpt{
     minSize=5 // 最小压缩文件的大小，小于这个大小的文件将被忽略
     tinyKeys=["your key"] //tinypng 服务，需要使用的key,支持多个
 }
-
 ```
+
+如果是build.gradle.kts构建脚本的话：
+```
+buildscript {
+    dependencies {
+        classpath("io.github.ufochuxian:imgcompressplugin:1.0.3")
+    }
+}
+
+//图片压缩插件配置
+plugins {
+    id("img-compressor")
+}
+imgCompressOpt {
+    way = "pngquant" // 资源压缩的方式（选项: "tinypng", "pngquant", "zopflip"）
+    test = false // 设置测试模式是否开启，false 表示压缩后图片直接覆盖原图，true 表示会把原图及压缩图输出到测试目录 (Project/ImageCompressTest)
+    whiteFiles = arrayListOf("text_pic1.png", "test_pic2.jpg") // 压缩白名单
+    minSize = 5 // 最小压缩文件的大小，小于这个大小的文件将被忽略
+    tinyKeys = arrayListOf("your key") // tinypng 服务，需要使用的 key，支持多个
+}
+```
+
 第二步:引入后点击`sync now`,gradle配置完毕后会显示下图`imgCompressTask`,双击即可执行,等待压缩结果即可
 - ![](.README_images/13f985f7.png)
 
