@@ -22,7 +22,7 @@ buildscript {
     dependencies {
 
         //插件本身的gradle.tool版本尽可能低,这样项目使用gradle一般就能向下兼容,不至于下载新的gradle版本
-        classpath 'com.android.tools.build:gradle:4.1.3'
+        classpath 'com.android.tools.build:gradle:7.4.2'
         //mavenCentral模式
 //        classpath 'io.github.duking666:ImgCompressPlugin:1.2.1'
         classpath 'io.github.ufochuxian:imgcompressplugin:1.0.1'

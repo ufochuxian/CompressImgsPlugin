@@ -12,14 +12,23 @@ import groovy.json.JsonOutput
 import org.gradle.api.DefaultTask
 import org.gradle.api.DomainObjectCollection
 import org.gradle.api.Project
+import org.gradle.api.tasks.Input
+import org.gradle.api.tasks.InputFile
+import org.gradle.api.tasks.InputFiles
+import org.gradle.api.tasks.OutputFile
 import org.gradle.api.tasks.TaskAction
 
 import java.nio.file.Files
 
 class ImgCompressTask extends DefaultTask {
+    @Input
     ImgCompressExtension config
-    Logger log
+    @Input
+    Logger log = Logger.getInstance(project.getProject())
+
+    @Input
     List<String> sizeDirList = ["greater500KB", "200~500KB", "100~200KB", "50~100KB", "20~50KB", "less20KB"]
+    @Input
     ResultInfo resultInfo = new ResultInfo()
 
     ImgCompressTask() {
@@ -28,10 +37,8 @@ class ImgCompressTask extends DefaultTask {
         config = project.imgCompressOpt
     }
 
-
     @TaskAction
     def run() {
-        log = Logger.getInstance(project.getProject())
         log.i("ImgCompressTask run")
 
         if (!project == project.getProject()) {
@@ -110,6 +117,7 @@ class ImgCompressTask extends DefaultTask {
      * 获取之前压缩文件信息
      * @return
      */
+    @InputFiles
     List<CompressInfo> getCompressedInfo() {
         //读取原先已压缩过的文件,如果压缩过则不再压缩
         def compressedList = new ArrayList<CompressInfo>()

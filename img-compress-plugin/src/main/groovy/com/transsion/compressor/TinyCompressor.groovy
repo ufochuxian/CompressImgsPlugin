@@ -8,11 +8,14 @@ import com.transsion.CompressInfo
 import com.transsion.ImgCompressExtension
 import org.gradle.api.Project
 import com.tinify.*
+import org.gradle.api.tasks.Input
 
 class TinyCompressor extends BaseCompressor {
     int keyIndex = 0
+    @Input
     def compressInfoList = new ArrayList<CompressInfo>()
     boolean accountError = false
+    @Input
     ImgCompressExtension config;
     long beforeTotalSize = 0
     long afterTotalSize = 0

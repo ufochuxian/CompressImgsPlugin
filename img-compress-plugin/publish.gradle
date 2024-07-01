@@ -4,7 +4,6 @@ apply plugin: "io.github.jeadyx.sonatype-uploader"
 apply plugin: "org.jetbrains.dokka"
 
 ext {
-    isLocal = true
     artifact = 'imgcompressplugin'
     libraryName = 'imgcompressplugin'
     libraryDescription = 'An Android gradle plugin that scans the resource directory in the project and performs batch image compression.'
@@ -68,11 +67,12 @@ publishing {
         }
     }
 }
-signing {
-    sign(publishing.publications.mavenTest)
-}
+
 
 if(!ext.isLocal) {
+    signing {
+        sign(publishing.publications.mavenTest)
+    }
     sonatypeUploader {
         def releasesRepoUrl = layout.buildDirectory.dir('repos')
         def snapshotsRepoUrl = layout.buildDirectory.dir('repos')

@@ -7,15 +7,19 @@ import com.transsion.util.Logger
 import com.transsion.util.PngquantUtil
 import com.transsion.ImgCompressExtension
 import org.gradle.api.Project
+import org.gradle.api.tasks.Input
 
 import java.nio.file.Files
 
 class PngquantCompressor extends BaseCompressor {
 //    def project;
+    @Input
     def compressInfoList = new ArrayList<CompressInfo>()
+    @Input
     ImgCompressExtension config
     def beforeTotalSize = 0
     def afterTotalSize = 0
+    @Input
     Logger log
     def skipCount=0 //用于压缩后变大的情况
 

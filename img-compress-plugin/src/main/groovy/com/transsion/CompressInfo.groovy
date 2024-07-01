@@ -1,6 +1,7 @@
 package com.transsion
 
-public class CompressInfo{
+
+class CompressInfo{
 
     long preSize;
     long compressedSize;
@@ -16,6 +17,7 @@ public class CompressInfo{
         this.md5 = md5
         ratio = (compressedSize * 1.0F/preSize *100).toInteger() +"%"
     }
+
 
     CompressInfo(long preSize, long compressedSize, String ratio, String path, String outputPath, String md5) {
         this.preSize = preSize
