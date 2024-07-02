@@ -6,7 +6,7 @@ plugins {
 }
 
 ext {
-    isLocal = false
+    isLocal = true
 }
 
 group = 'io.github.ufochuxian'

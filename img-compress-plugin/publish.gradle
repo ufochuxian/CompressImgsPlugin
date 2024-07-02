@@ -10,6 +10,17 @@ ext {
     libraryVersion = version
 }
 
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+def ossrhUsername = properties.getProperty("ossrhUsername")
+def ossrhPassword = properties.getProperty("ossrhPassword")
+
+def siteUrl = properties.getProperty("siteUrl")
+def gitUrl = properties.getProperty("properties")
+def developerId = properties.getProperty("developerId")
+def developerName = properties.getProperty("developerName")
+def developerEmail = properties.getProperty("developerEmail")
+
 tasks.register('dokkaJavadocJar', Jar) {
     dependsOn(tasks.named("dokkaJavadoc"))
     from(tasks.named("dokkaJavadoc"))
