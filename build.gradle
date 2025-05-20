@@ -7,6 +7,7 @@ buildscript {
         }
         google()
         mavenCentral()
+        mavenLocal()
         maven {
             url = uri("https://plugins.gradle.org/m2/")
         }
@@ -15,13 +16,14 @@ buildscript {
         //插件本身的gradle.tool版本尽可能低,这样项目使用gradle一般就能向下兼容,不至于下载新的gradle版本
         classpath 'com.android.tools.build:gradle:7.4.2'
         //mavenCentral模式
-        classpath 'io.github.ufochuxian:imgcompressplugin:1.0.3'
+        classpath 'io.github.ufochuxian:imgcompressplugin:1.0.4'
     }
 }
 
 allprojects {
     repositories {
         google()
+        mavenLocal()
         mavenCentral()
         jcenter()
     }

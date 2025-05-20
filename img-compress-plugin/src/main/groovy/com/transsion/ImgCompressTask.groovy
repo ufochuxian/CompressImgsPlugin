@@ -12,23 +12,20 @@ import groovy.json.JsonOutput
 import org.gradle.api.DefaultTask
 import org.gradle.api.DomainObjectCollection
 import org.gradle.api.Project
-import org.gradle.api.tasks.Input
-import org.gradle.api.tasks.InputFile
-import org.gradle.api.tasks.InputFiles
-import org.gradle.api.tasks.OutputFile
-import org.gradle.api.tasks.TaskAction
+import org.gradle.api.tasks.*
 
 import java.nio.file.Files
 
 class ImgCompressTask extends DefaultTask {
     @Input
     ImgCompressExtension config
-    @Input
+    @Internal
     Logger log = Logger.getInstance(project.getProject())
 
     @Input
     List<String> sizeDirList = ["greater500KB", "200~500KB", "100~200KB", "50~100KB", "20~50KB", "less20KB"]
-    @Input
+
+    @Internal
     ResultInfo resultInfo = new ResultInfo()
 
     ImgCompressTask() {
@@ -53,51 +50,35 @@ class ImgCompressTask extends DefaultTask {
         copyToTestPath(unCompressFileList)
         updateCompressInfoList(unCompressFileList, compressedList)
 
-
         log.i("Task finish, compressed:${resultInfo.compressedSize} files  skip:${resultInfo.skipCount} Files  before total size: ${FileUtils.formetFileSize(resultInfo.beforeSize)}" +
-                " after total size: ${FileUtils.formetFileSize(resultInfo.afterSize)} save size: ${FileUtils.formetFileSize(resultInfo.beforeSize - resultInfo.afterSize)}  ")
+                " after total size: ${FileUtils.formetFileSize(resultInfo.afterSize)} save size: ${FileUtils.formetFileSize(resultInfo.beforeSize - resultInfo.afterSize)}")
     }
 
-    /**
-     * 获取所有的资源目录
-     * @param root
-     * @return
-     */
     List<File> getSourcesDirs(Project root) {
         List<File> dirs = []
-        root.allprojects {
-            project ->
-                //仅对两种module做处理
-                log.i("ImgCompressTask deal ${project.name}")
-                if (project.plugins.hasPlugin(AppPlugin)) {
-                    dirs.addAll(getSourcesDirsWithVariant((DomainObjectCollection<BaseVariant>) project.android.applicationVariants))
-                } else if (project.plugins.hasPlugin(LibraryPlugin)) {
-                    dirs.addAll(getSourcesDirsWithVariant((DomainObjectCollection<BaseVariant>) project.android.libraryVariants))
-                } else {
-                    log.i("ignore project:" + project.name)
-                }
+        root.allprojects { project ->
+            log.i("ImgCompressTask deal ${project.name}")
+            if (project.plugins.hasPlugin(AppPlugin)) {
+                dirs.addAll(getSourcesDirsWithVariant(project.android.applicationVariants))
+            } else if (project.plugins.hasPlugin(LibraryPlugin)) {
+                dirs.addAll(getSourcesDirsWithVariant(project.android.libraryVariants))
+            } else {
+                log.i("ignore project:" + project.name)
+            }
         }
         log.i("dirs size = ${dirs.size()}")
         return dirs
     }
-    /**
-     * 根据当前module的variant获取所有打包方式的资源目录
-     * @param collection
-     * @return
-     */
+
     List<File> getSourcesDirsWithVariant(DomainObjectCollection<BaseVariant> collection) {
         List<File> imgDirectories = []
         collection.all { variant ->
             log.i("-------- variant: $variant.name --------")
             variant.sourceSets?.each { sourceSet ->
-                log.i("sourceSets.${sourceSet.name} -->")
                 if (sourceSet.resDirectories.empty) return
                 sourceSet.resDirectories.each { res ->
-                    if (res.exists()) {
-                        log.i("${res.name}.directories:")
-                        if (res.listFiles() == null) return
+                    if (res.exists() && res.listFiles() != null) {
                         res.eachDir {
-                            //收集所有drawable目录及mipmap目录
                             if (it.directory && (it.name.startsWith("drawable") || it.name.startsWith("mipmap"))) {
                                 if (!imgDirectories.contains(it)) {
                                     log.i("add dir $it")
@@ -108,230 +89,130 @@ class ImgCompressTask extends DefaultTask {
                     }
                 }
             }
-
         }
         return imgDirectories
     }
 
-    /**
-     * 获取之前压缩文件信息
-     * @return
-     */
-    @InputFiles
+    @Internal
     List<CompressInfo> getCompressedInfo() {
-        //读取原先已压缩过的文件,如果压缩过则不再压缩
-        def compressedList = new ArrayList<CompressInfo>()
-        def compressedListFile = new File("${project.projectDir}/image-compressed-info.json")
+        def compressedList = []
+        def compressedListFile = project.file("${project.projectDir}/image-compressed-info.json")
         if (!compressedListFile.exists()) {
             compressedListFile.createNewFile()
         } else {
             try {
-                //将已压缩过的文件json解析-->list
-
                 def json = new FileInputStream(compressedListFile).getText("utf-8")
-                def list = new Gson().fromJson(json, new TypeToken<ArrayList<CompressInfo>>() {
-                }.getType())
-                if (list instanceof ArrayList) {
-                    compressedList = list
-                } else {
-                    log.i("compressed-resource.json is invalid, ignore")
-                }
+                def list = new Gson().fromJson(json, new TypeToken<ArrayList<CompressInfo>>() {}.getType())
+                if (list instanceof ArrayList) compressedList = list
             } catch (Exception ignored) {
                 log.i("compressed-resource.json is invalid, ignore")
             }
         }
-
         log.i("getCompressedInfo size=${compressedList.size()}")
         return compressedList
-
-
     }
 
-    /**
-     * 获取待压缩的文件,过滤白名单目录及文件,过滤文件大小
-     * @param imgDirectories
-     * @param compressedList
-     * @return
-     */
+    @PathSensitive(PathSensitivity.RELATIVE)
+    @InputFiles
+    Iterable<File> getCompressedFiles() {
+        def files = getCompressedInfo()
+                .findAll { it?.path != null }
+                .collect { new File(project.projectDir, it.path) }
+                .findAll { it.exists() }
+        return files
+    }
+
+
     List<CompressInfo> getUnCompressFileList(List<File> imgDirectories, List<CompressInfo> compressedList) {
-        List<CompressInfo> unCompressFileList = new ArrayList<>()
+        List<CompressInfo> unCompressFileList = []
 
         dirFlag:
         for (File dir : imgDirectories) {
-            //剔除白名单目录
-//            if (!config.whiteDirs.empty) {
-//                for (String whiteDir : config.whiteDirs) {
-//                    if (whiteDir.equals(dir.getAbsolutePath())) {
-//                        log.i("ignore whiteDirectory >> " + directory.getAbsolutePath())
-//                        continue dirFlag
-//                    }
-//                }
-//            }
-
             fileFlag:
             for (File it : dir.listFiles()) {
                 String fileName = it.name
-//                log.i("fileName ${fileName}")
-
-                //过滤白名单文件
-                if (!config.whiteFiles.empty) {
-                    for (String s : config.whiteFiles) {
-                        if (fileName == s) {
-                            log.i("ignore whiteFiles >> " + it.getAbsolutePath())
-                            continue fileFlag
-                        }
-                    }
+                if (!config.whiteFiles.empty && config.whiteFiles.contains(fileName)) {
+                    log.i("ignore whiteFiles >> ${it.absolutePath}")
+                    continue fileFlag
                 }
                 def newMd5 = FileUtils.generateMD5(it)
-                //过滤已压缩文件
-                for (CompressInfo info : compressedList) {
-//                    log.i("origin : $newMd5   info.md5:${info.md5}  + ${info.md5.equals(newMd5)}")
-                    //md5校验
-                    if (info.md5 == newMd5) {
-                        log.i("ignore compressed >> " + it.getAbsolutePath())
-                        continue fileFlag
-                    }
+                if (compressedList.any { info -> info.md5 == newMd5 }) {
+                    log.i("ignore compressed >> ${it.absolutePath}")
+                    continue fileFlag
                 }
-                //过滤非jpg或png图片
-                if (fileName.endsWith(".jpg") || fileName.endsWith(".jpeg") ||fileName.endsWith(".png") || fileName.endsWith(".webp")) {
-                    //.9图剔除
-                    if (fileName.contains(".9")) {
-                        log.i("ignore 9.png >> " + it.getAbsolutePath())
-                        continue fileFlag
-                    }
-                    //过滤文件大小
-                    if (!(getPicSize(it) >= config.minSize)) {
-                        log.i("ignore size less than minSize  >> " + it.getAbsolutePath())
-                        continue fileFlag
-                    }
-
-                    unCompressFileList.add(new CompressInfo(-1, -1, "", it.getAbsolutePath(), getOutputPath(it), newMd5))
+                if ((fileName.endsWith(".jpg") || fileName.endsWith(".jpeg") || fileName.endsWith(".png") || fileName.endsWith(".webp")) &&
+                        !fileName.contains(".9") && getPicSize(it) >= config.minSize) {
+                    unCompressFileList.add(new CompressInfo(-1, -1, "", it.absolutePath, getOutputPath(it), newMd5))
                     log.i("add file  outputPath >> ${getOutputPath(it)}")
                 }
-
             }
-
-
         }
-
         return unCompressFileList
-
-
     }
 
-    /**
-     * 根据测试配置确定输出路径
-     * @param originImg
-     * @return
-     */
     String getOutputPath(File originImg) {
+        if (!config.test) return originImg.getAbsolutePath()
 
-        if (config.test) {
-            def testDir = new File("${project.projectDir}/ImageCompressTest")
-            if (!testDir.exists()) {
-                testDir.mkdir()
-                for (String sizeDir : sizeDirList) {
-                    def sizePath = new File("${project.projectDir}/ImageCompressTest/${sizeDir}")
-                    if (!sizePath.exists()) sizePath.mkdir()
-                }
+        def testDir = new File("${project.projectDir}/ImageCompressTest")
+        if (!testDir.exists()) {
+            testDir.mkdir()
+            sizeDirList.each {
+                def dir = new File(testDir, it)
+                if (!dir.exists()) dir.mkdir()
             }
-            def outPutPath = originImg.absolutePath
-            def fis = new FileInputStream(originImg)
-            def beforeSize = originImg == null ? 0 : fis.available()
-            def originName = originImg.getName()
-            def typeIndex = originName.indexOf(".")
-            def testName = originName.substring(0, typeIndex) + "(test)" + originName.substring(typeIndex, originName.length())
-//            log.i("testName >> " + testName)
-            if (beforeSize < 1024 * 20) {
-                outPutPath = "${project.projectDir}/ImageCompressTest/${sizeDirList[5]}/${testName}"
-            } else if (beforeSize < 1024 * 50) {
-                outPutPath = "${project.projectDir}/ImageCompressTest/${sizeDirList[4]}/${testName}"
-            } else if (beforeSize < 1024 * 100) {
-                outPutPath = "${project.projectDir}/ImageCompressTest/${sizeDirList[3]}/${testName}"
-            } else if (beforeSize < 1024 * 200) {
-                outPutPath = "${project.projectDir}/ImageCompressTest/${sizeDirList[2]}/${testName}"
-            } else if (beforeSize < 1024 * 500) {
-                outPutPath = "${project.projectDir}/ImageCompressTest/${sizeDirList[1]}/${testName}"
-            } else {
-                outPutPath = "${project.projectDir}/ImageCompressTest/${sizeDirList[0]}/${testName}"
-            }
-            return outPutPath
-
-        } else {
-            return originImg.getAbsolutePath()
         }
+        def beforeSize = new FileInputStream(originImg).available()
+        def fileSizeKB = beforeSize / 1024
+        def originName = originImg.name
+        def typeIndex = originName.indexOf(".")
+        def testName = originName[0..<typeIndex] + "(test)" + originName[typeIndex..-1]
 
+        def subDir = sizeDirList.find { s ->
+            switch (s) {
+                case "less20KB": return fileSizeKB < 20
+                case "20~50KB": return fileSizeKB < 50
+                case "50~100KB": return fileSizeKB < 100
+                case "100~200KB": return fileSizeKB < 200
+                case "200~500KB": return fileSizeKB < 500
+                case "greater500KB": return fileSizeKB >= 500
+            }
+        } ?: "greater500KB"
+
+        return "${project.projectDir}/ImageCompressTest/${subDir}/${testName}"
     }
 
-    /**
-     * 更新已压缩信息
-     * @param newCompressedList
-     * @param compressedList
-     * @return
-     */
-    def updateCompressInfoList(List<CompressInfo> newCompressedList, List<CompressInfo> compressedList) {
-        //脱敏
-        String projectDir = project.projectDir.getAbsolutePath()
-        for (CompressInfo info : newCompressedList) {
-            info.path = info.path.substring(projectDir.length(), info.path.length())
-            info.outputPath = info.outputPath.substring(projectDir.length(), info.outputPath.length())
-//            println("updateCompressInfoList >> ${info.path}")
-//            println("updateCompressInfoList >> ${info.outputPath}")
+    def updateCompressInfoList(List<CompressInfo> newList, List<CompressInfo> oldList) {
+        def projectDirPath = project.projectDir.absolutePath
+        newList.each { info ->
+            info.path = info.path.replace(projectDirPath, "")
+            info.outputPath = info.outputPath.replace(projectDirPath, "")
         }
-        for (CompressInfo newTinyPng : newCompressedList) {
-            def index = compressedList.md5.indexOf(newTinyPng.md5)
-            if (index >= 0) {
-                compressedList[index] = newTinyPng
-            } else {
-                compressedList.add(0, newTinyPng)
-            }
+        newList.each { newInfo ->
+            def index = oldList.findIndexOf { it.md5 == newInfo.md5 }
+            if (index >= 0) oldList[index] = newInfo else oldList.add(0, newInfo)
         }
-        def jsonOutput = new JsonOutput()
-        def json = jsonOutput.toJson(compressedList)
-
-        def compressedListFile = new File("${project.projectDir}/image-compressed-info.json")
-        if (!compressedListFile.exists()) {
-            compressedListFile.createNewFile()
-        }
-        compressedListFile.write(jsonOutput.prettyPrint(json), "utf-8")
+        def json = new JsonOutput().toJson(oldList)
+        new File("${project.projectDir}/image-compressed-info.json").write(JsonOutput.prettyPrint(json), "utf-8")
     }
 
-    /**
-     * 复制原文件到测试目录,便于比对
-     * @param newCompressedList
-     * @return
-     */
-    def copyToTestPath(List<CompressInfo> newCompressedList) {
+    def copyToTestPath(List<CompressInfo> newList) {
         if (!config.test) return
-        newCompressedList.each { info ->
+        newList.each { info ->
             File origin = new File(info.path)
-            String testPathName = new File(info.outputPath).parent + "/" + origin.getName()
-            File copyFile = new File(testPathName)
-            if (copyFile.exists()) {
-                copyFile.delete()
-            }
-            log.i("copyToTestPath >>" + testPathName)
+            File target = new File(new File(info.outputPath).parent, origin.name)
+            if (target.exists()) target.delete()
             try {
-                Files.copy(origin.toPath(), copyFile.toPath())
+                Files.copy(origin.toPath(), target.toPath())
             } catch (Exception e) {
-                log.i("copyToTestPath" + e.printStackTrace())
+                log.i("copyToTestPath error: ${e.message}")
             }
-
         }
-
-
     }
 
-    /**
-     * 获取图片大小,单位kb
-     * @param file
-     * @return
-     */
     int getPicSize(File file) {
         def fis = new FileInputStream(file)
-        def beforeSize = file == null ? 0 : fis.available()
-        if (fis != null) fis.close()
-        return beforeSize / 1024
+        def size = fis.available()
+        fis.close()
+        return size / 1024
     }
-
 }
